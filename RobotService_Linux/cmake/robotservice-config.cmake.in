@@ -1,0 +1,54 @@
+# RobotService CMake config file
+#
+# This file sets the following variables:
+# RobotService_FOUND - Always TRUE.
+# RobotService_INCLUDE_DIRS - Directories containing the RobotService include files.
+# RobotService_IDL_DIRS - Directories containing the RobotService IDL files.
+# RobotService_LIBRARIES - Libraries needed to use RobotService.
+# RobotService_DEFINITIONS - Compiler flags for RobotService.
+# RobotService_VERSION - The version of RobotService found.
+# RobotService_VERSION_MAJOR - The major version of RobotService found.
+# RobotService_VERSION_MINOR - The minor version of RobotService found.
+# RobotService_VERSION_REVISION - The revision version of RobotService found.
+# RobotService_VERSION_CANDIDATE - The candidate version of RobotService found.
+
+message(STATUS "Found RobotService-@PROJECT_VERSION@")
+set(RobotService_FOUND TRUE)
+
+find_package(<dependency> REQUIRED)
+
+#set(RobotService_INCLUDE_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@"
+#    ${<dependency>_INCLUDE_DIRS}
+#    )
+#
+#set(RobotService_IDL_DIRS
+#    "@CMAKE_INSTALL_PREFIX@/include/@PROJECT_NAME_LOWER@-@PROJECT_VERSION_MAJOR@/idl")
+set(RobotService_INCLUDE_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@"
+    ${<dependency>_INCLUDE_DIRS}
+    )
+set(RobotService_IDL_DIRS
+    "@CMAKE_INSTALL_PREFIX@/include/@CPACK_PACKAGE_FILE_NAME@/idl")
+
+
+if(WIN32)
+    set(RobotService_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_STATIC_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+else(WIN32)
+    set(RobotService_LIBRARIES
+        "@CMAKE_INSTALL_PREFIX@/@LIB_INSTALL_DIR@/@CMAKE_SHARED_LIBRARY_PREFIX@@PROJECT_NAME_LOWER@@CMAKE_SHARED_LIBRARY_SUFFIX@"
+        ${<dependency>_LIBRARIES}
+        )
+endif(WIN32)
+
+set(RobotService_DEFINITIONS ${<dependency>_DEFINITIONS})
+
+set(RobotService_VERSION @PROJECT_VERSION@)
+set(RobotService_VERSION_MAJOR @PROJECT_VERSION_MAJOR@)
+set(RobotService_VERSION_MINOR @PROJECT_VERSION_MINOR@)
+set(RobotService_VERSION_REVISION @PROJECT_VERSION_REVISION@)
+set(RobotService_VERSION_CANDIDATE @PROJECT_VERSION_CANDIDATE@)
+
