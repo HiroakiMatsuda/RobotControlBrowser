@@ -99,7 +99,7 @@ class RobotService(OpenRTM_aist.DataFlowComponentBase):
 
                         self.con = sqlite3.connect('./WebServer/data.db', isolation_level=None)
                         self.cur = self.con.cursor()
-                        self.cur.execute("SELECT * from val")
+                        self.cur.execute("SELECT * from val order by id")
                         for row in self.cur.fetchall():
                             self.last_index = row[0]
 
@@ -107,7 +107,7 @@ class RobotService(OpenRTM_aist.DataFlowComponentBase):
 
                 else:
 
-                        self.cur.execute("SELECT * from val")
+                        self.cur.execute("SELECT * from val order by id")
                         for row in self.cur.fetchall():
                                     if self.last_index < row[0]:
                                             self.last_index = row[0]
